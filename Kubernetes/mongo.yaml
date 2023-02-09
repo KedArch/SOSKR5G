@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      containers:
+      - name: mongo
+        image: mongo
+        ports:
+        - containerPort: 27017
+          name: db
+        volumeMounts:
+        - name: db-data
+          mountPath: /var/lib/mongodb
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          value: open5gs
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          value: open5gs
+        - name: MONGO_INITDB_DATABASE
+          value: open5gs
+  volumeClaimTemplates:
+  - metadata:
+      name: db-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi

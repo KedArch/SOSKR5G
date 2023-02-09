@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: udr
+  labels:
+    5g: udr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      5g: udr
+  template:
+    metadata:
+      labels:
+        5g: udr
+    spec:
+      containers:
+        - name: udr
+          image: udr:latest
+          imagePullPolicy: Never
+          env:
+            - name: DB_URI
+              value: mongodb://10.96.1.10/open5gs
