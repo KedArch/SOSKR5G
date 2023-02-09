@@ -8,8 +8,9 @@ COPY setup.sh /root/setup.sh
 
 #ENV PFCP_ADDR=
 #ENV GTPU_ADDR=
-#ENV METRICS_ADDR=
 #ENV SUBNET_ADDR=
+#ENV METRICS_ADDR=
+#ENV METRICS_PORT=
 
 RUN chmod +x /root/setup.sh
 

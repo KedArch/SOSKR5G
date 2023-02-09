@@ -1,14 +1,34 @@
 #!/bin/sh
-if [ -n "$PFCP_ADDR" ]; then
-    sed -z -i "s/\(upf:\n[^#]*pfcp:\n *[-]\{0,1\} addr:\) [0-9.]\{1,\}/\1 $PFCP_ADDR/" /etc/open5gs/upf.yaml
+CONFIG=/etc/open5gs/upf.yml
+if ! [ -f "$CONFIG-original" ]; then
+    mv $CONFIG $CONFIG-original
 fi
-if [ -n "$GTPU_ADDR" ]; then
-    sed -z -i "s/\(upf:\n[^#]*gtpu:\n *[-]\{0,1\} addr:\) [0-9.]\{1,\}/\1 $GTPU_ADDR/" /etc/open5gs/upf.yaml
+if [ -z "$PFCP_ADDR" ]; then
+    PFCP_ADDR=127.0.0.7
 fi
-if [ -n "$METRICS_ADDR" ]; then
-    sed -z -i "s/\(upf:\n[^#]*metrics:\n *[-]\{0,1\} addr:\) [0-9.]\{1,\}/\1 $METRICS_ADDR/" /etc/open5gs/upf.yaml
+if [ -z "$GTPU_ADDR" ]; then
+    GTPU_ADDR=127.0.0.7
 fi
-if [ -n "$SUBNET_ADDR" ]; then
-    sed -z -i "s/\(upf:\n[^#]*subnet:\n *[-]\{0,1\} addr:\) [0-9\/.]\{1,\}/\1 $SUBNET_ADDR/" /etc/open5gs/upf.yaml
+if [ -z "$SUBNET_ADDR" ]; then
+    SUBNET_ADDR="10.45.0.1/16 2001:db8:cafe::1/48"
 fi
+if [ -z "$METRICS_ADDR" ]; then
+    METRICS_ADDR=127.0.0.7
+fi
+if [ -z "$METRICS_PORT" ]; then
+    METRICS_PORT=9090
+fi
+printf "logger:\n  file: @localstatedir@/log/open5gs/upf.log" > $CONFIG
+printf "\n\nupf:\n  pcfp:\n" >> $CONFIG
+echo "    - addr: $PFCP_ADDR" >> $CONFIG
+echo "  gtpu:" >> $CONFIG
+echo "    - addr: $GTPU_ADDR" >> $CONFIG
+echo "  subnet:" >> $CONFIG
+for I in $SUBNET_ADDR; do
+    echo "    - addr: $I" >> $CONFIG
+done
+echo "  metrics:" >> $CONFIG
+echo "    - addr: $METRICS_ADDR" >> $CONFIG
+echo "      port: $METRICS_PORT" >> $CONFIG
+printf "\nsmf:\n\nparameter:\n\nmax:\n\ntime:" >> $CONFIG
 /bin/open5gs-upfd
