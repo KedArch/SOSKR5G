@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: udm
+  labels:
+    5g: udm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      5g: udm
+  template:
+    metadata:
+      labels:
+        5g: udm
+    spec:
+      containers:
+        - name: udm
+          image: udm:latest
+          imagePullPolicy: Never
+          env:
+            - name: UDM_ADDR
+              value: 0.0.0.0
+            - name: SCP_ADDR
+              value: scp-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: udm-service
+spec:
+  type: ClusterIP
+  selector:
+    5g: udm
+  ports:
+    - protocol: TCP
+      port: 7777
+      targetPort: 7777
