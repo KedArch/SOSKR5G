@@ -35,6 +35,10 @@ spec:
               value:
             - name: DNS_ADDR
               value:
+            - name: SCP_ADDR
+              value: scp-service
+            - name: UPF_ADDR
+              value: upf-service
 ---
 apiVersion: v1
 kind: Service

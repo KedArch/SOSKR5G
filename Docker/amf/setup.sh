@@ -1,5 +1,5 @@
 #!/bin/sh
-CONFIG=/etc/open5gs/upf.yaml
+CONFIG=/etc/open5gs/amf.yaml
 if ! [ -f "$CONFIG-original" ]; then
     mv $CONFIG $CONFIG-original
 fi
