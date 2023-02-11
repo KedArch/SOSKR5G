@@ -22,7 +22,7 @@ spec:
             - name: NSSF_ADDR
               value: 0.0.0.0
             - name: NSI_ADDR
-              value: nrf-servicee
+              value: nrf-service
             - name: SCP_ADDR
               value: scp-service
 ---
