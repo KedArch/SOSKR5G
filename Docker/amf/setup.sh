@@ -41,18 +41,7 @@ if [ -z "$SCP_PORT" ]; then
 fi
 POINTER=`echo $HOSTNAME | cut -d"-" -f2`
 printf "logger:
-    file: @localstatedir@/log/open5gs/amf.log
-
-tls:
-    enabled: no
-    server:
-      cacert: @sysconfdir@/open5gs/tls/ca.crt
-      key: @sysconfdir@/open5gs/tls/amf.key
-      cert: @sysconfdir@/open5gs/tls/amf.crt
-    client:
-      cacert: @sysconfdir@/open5gs/tls/ca.crt
-      key: @sysconfdir@/open5gs/tls/amf.key
-      cert: @sysconfdir@/open5gs/tls/amf.crt
+    file: /var/log/open5gs/amf.log
 
 amf:
     sbi:

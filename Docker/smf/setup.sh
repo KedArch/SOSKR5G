@@ -45,18 +45,7 @@ if [ -z "$UPF_ADDR" ]; then
     UPF_ADDR=127.0.0.7
 fi
 printf "logger:
-    file: @localstatedir@/log/open5gs/smf.log
-
-tls:
-    enabled: no
-    server:
-      cacert: @sysconfdir@/open5gs/tls/ca.crt
-      key: @sysconfdir@/open5gs/tls/smf.key
-      cert: @sysconfdir@/open5gs/tls/smf.crt
-    client:
-      cacert: @sysconfdir@/open5gs/tls/ca.crt
-      key: @sysconfdir@/open5gs/tls/smf.key
-      cert: @sysconfdir@/open5gs/tls/smf.crt
+    file: /var/log/open5gs/smf.log
 
 smf:
     sbi:
@@ -78,7 +67,7 @@ smf:
     mtu: 1400
     ctf:
       enabled: auto
-    freeDiameter: @sysconfdir@/freeDiameter/smf.conf
+    freeDiameter: /etc/freeDiameter/smf.conf
 
 scp:
     sbi:

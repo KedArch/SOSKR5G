@@ -21,18 +21,7 @@ fi
 printf "db_uri: $DB_URI
 
 logger:
-    file: @localstatedir@/log/open5gs/udr.log
-
-tls:
-    enabled: no
-    server:
-      cacert: @sysconfdir@/open5gs/tls/ca.crt
-      key: @sysconfdir@/open5gs/tls/udr.key
-      cert: @sysconfdir@/open5gs/tls/udr.crt
-    client:
-      cacert: @sysconfdir@/open5gs/tls/ca.crt
-      key: @sysconfdir@/open5gs/tls/udr.key
-      cert: @sysconfdir@/open5gs/tls/udr.crt
+    file: /var/log/open5gs/udr.log
 
 udr:
     sbi:

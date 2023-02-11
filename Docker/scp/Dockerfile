@@ -6,6 +6,7 @@ RUN add-apt-repository ppa:open5gs/latest && \
     apt-get clean
 COPY setup.sh /root/setup.sh
 
+#ENV DB_URI=
 #ENV SCP_ADDR=
 #ENV SCP_PORT=
 #ENV NRF_ADDR=
