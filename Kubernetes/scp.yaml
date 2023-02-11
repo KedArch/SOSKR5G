@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scp
+  labels:
+    5g: scp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      5g: scp
+  template:
+    metadata:
+      labels:
+        5g: scp
+    spec:
+      containers:
+        - name: scp
+          image: scp:latest
+          imagePullPolicy: Never
+          env:
+            - name: DB_URI
+              value: mongodb://mongo-service/open5gs
+            - name: SCP_ADDR
+              value: 0.0.0.0
+            - name: NRF_ADDR
+              value: nrf-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: scp-service
+spec:
+  type: ClusterIP
+  selector:
+    5g: scp
+  ports:
+    - protocol: TCP
+      port: 7777
+      targetPort: 7777
