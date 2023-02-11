@@ -1,5 +1,5 @@
 #!/bin/sh
-CONFIG=/etc/open5gs/nssf.yml
+CONFIG=/etc/open5gs/nssf.yaml
 if ! [ -f "$CONFIG-original" ]; then
     mv $CONFIG $CONFIG-original
 fi

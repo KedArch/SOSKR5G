@@ -1,5 +1,5 @@
 #!/bin/sh
-CONFIG=/etc/open5gs/udr.yml
+CONFIG=/etc/open5gs/udr.yaml
 if ! [ -f "$CONFIG-original" ]; then
     mv $CONFIG $CONFIG-original
 fi

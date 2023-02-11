@@ -1,5 +1,5 @@
 #!/bin/sh
-CONFIG=/etc/open5gs/smf.yml
+CONFIG=/etc/open5gs/smf.yaml
 if ! [ -f "$CONFIG-original" ]; then
     mv $CONFIG $CONFIG-original
 fi
