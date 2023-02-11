@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nssf
+  labels:
+    5g: nssf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      5g: nssf
+  template:
+    metadata:
+      labels:
+        5g: nssf
+    spec:
+      containers:
+        - name: nssf
+          image: nssf:latest
+          imagePullPolicy: Never
+          env:
+            - name: NSSF_ADDR
+              value: 0.0.0.0
+            - name: NSI_ADDR
+              value: nrf-servicee
+            - name: SCP_ADDR
+              value: scp-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nssf-service
+spec:
+  type: ClusterIP
+  selector:
+    5g: nssf
+  ports:
+    - protocol: TCP
+      port: 7777
+      targetPort: 7777
