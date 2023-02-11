@@ -1,5 +1,5 @@
 #!/bin/sh
-CONFIG=/etc/open5gs/nrf.yml
+CONFIG=/etc/open5gs/nrf.yaml
 if ! [ -f "$CONFIG-original" ]; then
     mv $CONFIG $CONFIG-original
 fi
