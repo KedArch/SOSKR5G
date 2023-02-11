@@ -1,4 +1,0 @@
-Useful for testing environment on MiniKube
-eval $(minikube docker-env)
-
-MongoDB isn't responding???
