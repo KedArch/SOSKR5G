@@ -1,26 +1,108 @@
 #!/bin/sh
-if [ -n "$SBI_ADDR" ]; then
-    sed -z -i "s/\(amf:\n[^#]*sbi:\n *[-]\{0,1\} addr:\) [0-9.]\{1,\}/\1 $SBI_ADDR/" /etc/open5gs/amf.yaml
+CONFIG=/etc/open5gs/upf.yml
+if ! [ -f "$CONFIG-original" ]; then
+    mv $CONFIG $CONFIG-original
 fi
-if [ -n "$NGAP_ADDR" ]; then
-    sed -z -i "s/\(amf:\n[^#]*ngap:\n *[-]\{0,1\} addr:\) [0-9.]\{1,\}/\1 $NGAP_ADDR/" /etc/open5gs/amf.yaml
+if [ -z "$AMF_ADDR" ]; then
+    AMF_ADDR=127.0.0.5
 fi
-if [ -n "$METRICS_ADDR" ]; then
-    sed -z -i "s/\(amf:\n[^#]*metrics:\n *[-]\{0,1\} addr:\) [0-9.]\{1,\}/\1 $METRICS_ADDR/" /etc/open5gs/amf.yaml
+if [ -z "$AMF_PORT" ]; then
+    AMF_PORT=7777
 fi
-if [ -n "$SCP_ADDR" ]; then
-    sed -z -i "s/\(scp:\n[^#]*sbi:\n *[-]\{0,1\} addr:\) [0-9.]\{1,\}/\1 $SCP_ADDR/" /etc/open5gs/amf.yaml
+if [ -z "$NGAP_ADDR" ]; then
+    NGAP_ADDR=127.0.0.5
 fi
-if [ -n "$MCC" ]; then
-    sed -i "s/mcc: [0-9]\{3\}/mcc: $MCC/" /etc/open5gs/amf.yaml
+if [ -z "$METRICS_ADDR" ]; then
+    METRICS_ADDR=127.0.0.5
 fi
-if [ -n "$MNC" ]; then
-    sed -i "s/mnc: [0-9]\{2\}/mnc: $MNC/" /etc/open5gs/amf.yaml
+if [ -z "$METRICS_PORT" ]; then
+    METRICS_PORT=9090
 fi
-if [ -n "$NETWORK_NAME" ]; then
-    sed -i "s/^\([^#].*\)full: .*/\1full: $NETWORK_NAME/" /etc/open5gs/amf.yaml
+if [ -z "$MCC" ]; then
+    MCC=999
 fi
-if [ -n "$NAME" ]; then
-    sed -i "s/^\([^#].*\)amf_name: .*/\1amf_name: $NAME/" /etc/open5gs/amf.yaml
+if [ -z "$MNC" ]; then
+    MNC=70
 fi
+if [ -z "$REGION" ]; then
+    REGION=2
+fi
+if [ -z "$SET" ]; then
+    SET=1
+fi
+if [ -z "$NETWORK_NAME" ]; then
+    NETWORK_NAME=Open5GS
+fi
+if [ -z "$SCP_ADDR" ]; then
+    SCP_ADDR=127.0.1.10
+fi
+if [ -z "$SCP_PORT" ]; then
+    SCP_PORT=7777
+fi
+POINTER=`echo $HOSTNAME | cut -d"-" -f2`
+printf "logger:
+    file: @localstatedir@/log/open5gs/amf.log
+
+tls:
+    enabled: no
+    server:
+      cacert: @sysconfdir@/open5gs/tls/ca.crt
+      key: @sysconfdir@/open5gs/tls/amf.key
+      cert: @sysconfdir@/open5gs/tls/amf.crt
+    client:
+      cacert: @sysconfdir@/open5gs/tls/ca.crt
+      key: @sysconfdir@/open5gs/tls/amf.key
+      cert: @sysconfdir@/open5gs/tls/amf.crt
+
+amf:
+    sbi:
+      - addr: $AMF_ADDR
+        port: $AMF_PORT
+    ngap:
+      - addr: $NGAP_ADDR
+    metrics:
+      - addr: $METRICS_ADDR
+        port: $METRICS_PORT
+    guami:
+      - plmn_id:
+          mcc: $MCC
+          mnc: $MNC
+        amf_id:
+          region: $REGION
+          set: $SET
+          pointer: $POINTER
+    tai:
+      - plmn_id:
+          mcc: $MCC
+          mnc: $MNC
+        tac: 1
+    plmn_support:
+      - plmn_id:
+          mcc: $MCC
+          mnc: $MNC
+        s_nssai:
+          - sst: 1
+    security:
+        integrity_order : [ NIA2, NIA1, NIA0 ]
+        ciphering_order : [ NEA0, NEA1, NEA2 ]
+    network_name:
+        full: $NETWORK_NAME
+    amf_name: $HOSTNAME
+
+scp:
+    sbi:
+      - addr: $SCP_ADDR
+        port: $SCP_PORT
+
+
+parameter:
+
+max:
+
+usrsctp:
+
+time:
+  t3512:
+    value: 540
+" > $CONFIG
 /bin/open5gs-amfd

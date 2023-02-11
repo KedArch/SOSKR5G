@@ -6,8 +6,10 @@ RUN add-apt-repository ppa:open5gs/latest && \
     apt-get clean
 COPY setup.sh /root/setup.sh
 
-#ENV SBI_ADDR=
+#ENV UDM_ADDR=
+#ENV UDM_PORT=
 #ENV SCP_ADDR=
+#ENV SCP_PORT=
 
 RUN chmod +x /root/setup.sh
 
