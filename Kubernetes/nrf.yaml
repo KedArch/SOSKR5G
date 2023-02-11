@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nrf
+  labels:
+    5g: nrf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      5g: nrf
+  template:
+    metadata:
+      labels:
+        5g: nrf
+    spec:
+      containers:
+        - name: nrf
+          image: nrf:latest
+          imagePullPolicy: Never
+          env:
+            - name: NRF_ADDR
+              value: 0.0.0.0
+            - name: SCP_ADDR
+              value: scp-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nrf-service
+spec:
+  type: ClusterIP
+  selector:
+    5g: nrf
+  ports:
+    - protocol: TCP
+      port: 7777
+      targetPort: 7777
