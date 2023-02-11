@@ -1,8 +1,50 @@
 #!/bin/sh
-if [ -n "$SBI_ADDR" ]; then
-    sed -z -i "s/\(nrf:\n[^#]*sbi:\n *[-]\{0,1\} addr:\) [0-9.]\{1,\}/\1 $SBI_ADDR/" /etc/open5gs/nrf.yaml
+CONFIG=/etc/open5gs/nrf.yml
+if ! [ -f "$CONFIG-original" ]; then
+    mv $CONFIG $CONFIG-original
 fi
-if [ -n "$SCP_ADDR" ]; then
-    sed -z -i "s/\(scp:\n[^#]*sbi:\n *[-]\{0,1\} addr:\) [0-9.]\{1,\}/\1 $SCP_ADDR/" /etc/open5gs/nrf.yaml
+if [ -z "$NRF_ADDR" ]; then
+    NRF_ADDR="127.0.0.10 ::1"
 fi
+NRF_ADDR=`echo $NRF_ADDR | sed 's/ /\n        - /g'`
+if [ -z "$NRF_PORT" ]; then
+    NRF_PORT=7777
+fi
+if [ -z "$SCP_ADDR" ]; then
+    SCP_ADDR=127.0.1.10
+fi
+if [ -z "$SCP_PORT" ]; then
+    SCP_PORT=7777
+fi
+printf "logger:
+    file: @localstatedir@/log/open5gs/nrf.log
+
+tls:
+    enabled: no
+    server:
+      cacert: @sysconfdir@/open5gs/tls/ca.crt
+      key: @sysconfdir@/open5gs/tls/nrf.key
+      cert: @sysconfdir@/open5gs/tls/nrf.crt
+    client:
+      cacert: @sysconfdir@/open5gs/tls/ca.crt
+      key: @sysconfdir@/open5gs/tls/nrf.key
+      cert: @sysconfdir@/open5gs/tls/nrf.crt
+
+nrf:
+    sbi:
+      - addr:
+        - $NRF_ADDR
+        port: $NRF_PORT
+
+scp:
+    sbi:
+      - addr: $SCP_ADDR
+        port: $SCP_PORT
+
+parameter:
+
+max:
+
+time:
+" > $CONFIG
 /bin/open5gs-nrfd
