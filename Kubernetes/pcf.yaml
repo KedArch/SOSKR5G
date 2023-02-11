@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pcf
+  labels:
+    5g: pcf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      5g: pcf
+  template:
+    metadata:
+      labels:
+        5g: pcf
+    spec:
+      containers:
+        - name: pcf
+          image: pcf:latest
+          imagePullPolicy: Never
+          env:
+            - name: DB_URI
+              value: mongodb://mongo-service/open5gs
+            - name: PCF_ADDR
+              value: 0.0.0.0
+            - name: METRICS_ADDR
+              value:
+            - name: METRICS_PORT
+              value:
+            - name: SCP_ADDR
+              value: scp-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pcf-service
+spec:
+  type: ClusterIP
+  selector:
+    5g: pcf
+  ports:
+    - protocol: TCP
+      port: 7777
+      targetPort: 7777
