@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ausf
+  labels:
+    5g: ausf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      5g: ausf
+  template:
+    metadata:
+      labels:
+        5g: ausf
+    spec:
+      containers:
+        - name: ausf
+          image: ausf:latest
+          imagePullPolicy: Never
+          env:
+            - name: AUSF_ADDR
+              value: 0.0.0.0
+            - name: SCP_ADDR
+              value: scp-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ausf-service
+spec:
+  type: ClusterIP
+  selector:
+    5g: ausf
+  ports:
+    - protocol: TCP
+      port: 7777
+      targetPort: 7777
