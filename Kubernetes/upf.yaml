@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: upf
+  labels:
+    5g: upf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      5g: upf
+  template:
+    metadata:
+      labels:
+        5g: upf
+    spec:
+      containers:
+        - name: upf
+          image: upf:latest
+          imagePullPolicy: Never
+          env:
+            - name: PFCP_ADDR
+              value: 0.0.0.0
+            - name: GTPU_ADDR
+              value: 0.0.0.0
+            - name: SUBNET_ADDR
+              value:
+            - name: METRICS_ADDR
+              value:
+            - name: METRICS_PORT
+              value:
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: upf-service
+spec:
+  type: ClusterIP
+  selector:
+    5g: upf
+  ports:
+    - protocol: UDP
+      port: 8805
+      targetPort: 8805
+      name: smf-pfcp
+    - protocol: UDP
+      port: 2152
+      targetPort: 2152
+      name: smf-gtpu
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: upf-node-service
+spec:
+  type: NodePort
+  selector:
+    5g: upf
+  ports:
+    - protocol: UDP
+      port: 2152
+      targetPort: 2152
+      nodePort: 32152
