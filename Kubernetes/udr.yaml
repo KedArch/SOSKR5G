@@ -20,4 +20,21 @@ spec:
           imagePullPolicy: Never
           env:
             - name: DB_URI
-              value: mongodb://10.96.1.10/open5gs
+              value: mongodb://mongo-service/open5gs
+            - name: UDR_ADDR
+              value: 0.0.0.0
+            - name: SCP_ADDR
+              value: scp-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: udr-service
+spec:
+  type: ClusterIP
+  selector:
+    5g: udr
+  ports:
+    - protocol: TCP
+      port: 7777
+      targetPort: 7777
