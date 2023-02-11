@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smf
+  labels:
+    5g: smf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      5g: smf
+  template:
+    metadata:
+      labels:
+        5g: smf
+    spec:
+      containers:
+        - name: smf
+          image: smf:latest
+          imagePullPolicy: Never
+          env:
+            - name: SMF_ADDR
+              value: 0.0.0.0
+            - name: PFCP_ADDR
+              value: 0.0.0.0
+            - name: GTPC_ADDR
+              value: 0.0.0.0
+            - name: GTPU_ADDR
+              value: 0.0.0.0
+            - name: METRICS_ADDR
+              value:
+            - name: METRICS_PORT
+              value:
+            - name: SUBNET_ADDR
+              value:
+            - name: DNS_ADDR
+              value:
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: smf-service
+spec:
+  type: ClusterIP
+  selector:
+    5g: smf
+  ports:
+    - protocol: TCP
+      port: 7777
+      targetPort: 7777
+      name: sbi
+    - protocol: UDP
+      port: 2123
+      targetPort: 2123
+      name: gnb
