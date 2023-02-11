@@ -16,18 +16,7 @@ if [ -z "$SCP_PORT" ]; then
     SCP_PORT=7777
 fi
 printf "logger:
-    file: @localstatedir@/log/open5gs/ausf.log
-
-tls:
-    enabled: no
-    server:
-      cacert: @sysconfdir@/open5gs/tls/ca.crt
-      key: @sysconfdir@/open5gs/tls/ausf.key
-      cert: @sysconfdir@/open5gs/tls/ausf.crt
-    client:
-      cacert: @sysconfdir@/open5gs/tls/ca.crt
-      key: @sysconfdir@/open5gs/tls/ausf.key
-      cert: @sysconfdir@/open5gs/tls/ausf.crt
+    file: /var/log/open5gs/ausf.log
 
 ausf:
     sbi:

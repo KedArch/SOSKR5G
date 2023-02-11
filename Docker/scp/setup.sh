@@ -3,6 +3,9 @@ CONFIG=/etc/open5gs/scp.yml
 if ! [ -f "$CONFIG-original" ]; then
     mv $CONFIG $CONFIG-original
 fi
+if [ -z "$DB_URI" ]; then
+    DB_URI=mongodb://localhost/open5gs
+fi
 if [ -z "$SCP_ADDR" ]; then
     SCP_ADDR=127.0.1.10
 fi
@@ -16,21 +19,10 @@ NRF_ADDR=`echo $NRF_ADDR | sed 's/ /\n          - /g'`
 if [ -z "$NRF_PORT" ]; then
     NRF_PORT=7777
 fi
-printf "db_uri: mongodb://localhost/open5gs
+printf "db_uri: $DB_URI
 
 logger:
-    file: @localstatedir@/log/open5gs/scp.log
-
-tls:
-    enabled: no
-    server:
-      cacert: @sysconfdir@/open5gs/tls/ca.crt
-      key: @sysconfdir@/open5gs/tls/scp.key
-      cert: @sysconfdir@/open5gs/tls/scp.crt
-    client:
-      cacert: @sysconfdir@/open5gs/tls/ca.crt
-      key: @sysconfdir@/open5gs/tls/scp.key
-      cert: @sysconfdir@/open5gs/tls/scp.crt
+    file: /var/log/open5gs/scp.log
 
 scp:
     sbi:

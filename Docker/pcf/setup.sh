@@ -27,18 +27,7 @@ fi
 printf "db_uri: $DB_URI
 
 logger:
-    file: @localstatedir@/log/open5gs/pcf.log
-
-tls:
-    enabled: no
-    server:
-      cacert: @sysconfdir@/open5gs/tls/ca.crt
-      key: @sysconfdir@/open5gs/tls/pcf.key
-      cert: @sysconfdir@/open5gs/tls/pcf.crt
-    client:
-      cacert: @sysconfdir@/open5gs/tls/ca.crt
-      key: @sysconfdir@/open5gs/tls/pcf.key
-      cert: @sysconfdir@/open5gs/tls/pcf.crt
+    file: /var/log/open5gs/pcf.log
 
 pcf:
     sbi:

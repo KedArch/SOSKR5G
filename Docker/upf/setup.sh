@@ -20,7 +20,7 @@ if [ -z "$METRICS_PORT" ]; then
     METRICS_PORT=9090
 fi
 printf "logger:
-    file: @localstatedir@/log/open5gs/upf.log
+    file: /var/log/open5gs/upf.log
 
 upf:
     pfcp:
