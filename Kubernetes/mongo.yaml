@@ -23,9 +23,9 @@ spec:
           mountPath: /var/lib/mongodb
         env:
         - name: MONGO_INITDB_ROOT_USERNAME
-          value: open5gs
+          value:
         - name: MONGO_INITDB_ROOT_PASSWORD
-          value: open5gs
+          value:
         - name: MONGO_INITDB_DATABASE
           value: open5gs
   volumeClaimTemplates:
