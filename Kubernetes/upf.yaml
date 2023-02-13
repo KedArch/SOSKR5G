@@ -23,8 +23,6 @@ spec:
             capabilities:
               #drop: ["all"]
               add: ["NET_ADMIN"]
-          command: ["/bin/sh","-c"]
-          args: ["mkdir /dev/net && su -c 'mknod /dev/net/tun c 10 200 && /root/setup.sh'"]
           env:
             - name: PFCP_ADDR
               value: 0.0.0.0

@@ -12,6 +12,9 @@ fi
 if [ -z "$SUBNET_ADDR" ]; then
     SUBNET_ADDR="10.45.0.1/16 2001:db8:cafe::1/48"
 fi
+# Create /dev/net/tun - requires NET_ADMIN capabilities
+mkdir /dev/net
+mknod /dev/net/tun c 10 200
 # Modified version of setup script from open5gs repository
 if ! grep "ogstun" /proc/net/dev > /dev/null; then
     ip tuntap add name ogstun mode tun
