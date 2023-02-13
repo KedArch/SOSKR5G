@@ -12,6 +12,16 @@ fi
 if [ -z "$SUBNET_ADDR" ]; then
     SUBNET_ADDR="10.45.0.1/16 2001:db8:cafe::1/48"
 fi
+# Modified version of setup script from open5gs repository
+if ! grep "ogstun" /proc/net/dev > /dev/null; then
+    ip tuntap add name ogstun mode tun
+fi
+for I in $SUBNET_ADDR; do
+    ip addr del $I dev ogstun 2> /dev/null
+    ip addr add $I dev ogstun
+done
+ip link set ogstun up
+# github.com/open5gs/open5gs - modified
 SUBNET_ADDR=`echo $SUBNET_ADDR | sed 's/ /\n      - addr: /g'`
 if [ -z "$METRICS_ADDR" ]; then
     METRICS_ADDR=127.0.0.7
