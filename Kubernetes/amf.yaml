@@ -28,10 +28,14 @@ spec:
             - name: METRICS_PORT
               value:
             - name: MCC
-              value:
+              value: "001"
             - name: MNC
-              value:
+              value: "01"
             - name: NETWORK_NAME
+              value:
+            - name: SCP_ADDR
+              value: scp-service
+            - name: SCP_PORT
               value:
 ---
 apiVersion: v1

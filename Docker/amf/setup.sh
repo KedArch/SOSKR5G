@@ -91,7 +91,5 @@ max:
 usrsctp:
 
 time:
-  t3512:
-    value: 540
 " > $CONFIG
 /bin/open5gs-amfd
