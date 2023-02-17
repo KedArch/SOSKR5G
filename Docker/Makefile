@@ -1,11 +1,13 @@
 .PHONY: build-all
-build-all: build-baza build-amf build-ausf build-nrf build-nssf build-pcf build-scp build-smf build-udm build-udr build-upf build-webui
+build-all: build-baza build-amf build-ausf build-bsf build-nrf build-nssf build-pcf build-scp build-smf build-udm build-udr build-upf build-webui
 build-baza:
 	docker build --tag baza baza
 build-amf: build-baza
 	docker build --tag amf amf
 build-ausf: build-baza
 	docker build --tag ausf ausf
+build-bsf: build-baza
+	docker build --tag bsf bsf
 build-nrf: build-baza
 	docker build --tag nrf nrf
 build-nssf: build-baza

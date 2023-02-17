@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bsf
+  labels:
+    5g: bsf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      5g: bsf
+  template:
+    metadata:
+      labels:
+        5g: bsf
+    spec:
+      containers:
+        - name: bsf
+          image: bsf:latest
+          imagePullPolicy: Never
+          env:
+            - name: DB_URI
+              value: mongodb://mongo-service/open5gs
+            - name: BSF_ADDR
+              value: 0.0.0.0
+            - name: SCP_ADDR
+              value: scp-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bsf-service
+spec:
+  type: ClusterIP
+  selector:
+    5g: bsf
+  ports:
+    - protocol: TCP
+      port: 7777
+      targetPort: 7777
