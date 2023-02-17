@@ -23,6 +23,8 @@ spec:
               value: 0.0.0.0
             - name: SCP_ADDR
               value: scp-service
+            - name: NRF_ADDR
+              value: nrf-service
 ---
 apiVersion: v1
 kind: Service

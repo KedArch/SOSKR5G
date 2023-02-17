@@ -23,12 +23,10 @@ spec:
               value: mongodb://mongo-service/open5gs
             - name: PCF_ADDR
               value: 0.0.0.0
-            - name: METRICS_ADDR
-              value:
-            - name: METRICS_PORT
-              value:
             - name: SCP_ADDR
               value: scp-service
+            - name: NRF_ADDR
+              value: nrf-service
 ---
 apiVersion: v1
 kind: Service

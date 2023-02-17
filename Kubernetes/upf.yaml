@@ -28,12 +28,8 @@ spec:
               value: 0.0.0.0
             - name: GTPU_ADDR
               value: 0.0.0.0
-            - name: SUBNET_ADDR
-              value:
-            - name: METRICS_ADDR
-              value:
-            - name: METRICS_PORT
-              value:
+            - name: SMF_ADDR
+              value: smf-service
 ---
 apiVersion: v1
 kind: Service
@@ -47,11 +43,11 @@ spec:
     - protocol: UDP
       port: 8805
       targetPort: 8805
-      name: smf-pfcp
+      name: pfcp
     - protocol: UDP
       port: 2152
       targetPort: 2152
-      name: smf-gtpu
+      name: gtpu
 ---
 apiVersion: v1
 kind: Service
@@ -65,4 +61,4 @@ spec:
     - protocol: UDP
       port: 2152
       targetPort: 2152
-      nodePort: 32152
+      nodePort: 2152

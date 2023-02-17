@@ -23,10 +23,6 @@ spec:
               value: 0.0.0.0
             - name: NGAP_ADDR
               value: 0.0.0.0
-            - name: METRICS_ADDR
-              value:
-            - name: METRICS_PORT
-              value:
             - name: MCC
               value: "001"
             - name: MNC
@@ -35,8 +31,8 @@ spec:
               value:
             - name: SCP_ADDR
               value: scp-service
-            - name: SCP_PORT
-              value:
+            - name: NRF_ADDR
+              value: nrf-service
 ---
 apiVersion: v1
 kind: Service
@@ -63,4 +59,4 @@ spec:
     - protocol: SCTP
       port: 38412
       targetPort: 38412
-      nodePort: 32412
+      nodePort: 38412
