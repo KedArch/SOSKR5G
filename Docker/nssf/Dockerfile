@@ -11,7 +11,9 @@ COPY setup.sh /root/setup.sh
 #ENV NSI_ADDR=
 #ENV NSI_PORT=
 #ENV SCP_ADDR=
-#ENV SCP_PORT=
+#ENV SCP_ADDR=
+#ENV NRF_PORT=
+#ENV NRF_PORT=
 
 RUN chmod +x /root/setup.sh
 

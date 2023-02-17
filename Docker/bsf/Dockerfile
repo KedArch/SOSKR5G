@@ -11,6 +11,8 @@ COPY setup.sh /root/setup.sh
 #ENV BSF_PORT=
 #ENV SCP_ADDR=
 #ENV SCP_PORT=
+#ENV NRF_ADDR=
+#ENV NRF_PORT=
 
 RUN chmod +x /root/setup.sh
 

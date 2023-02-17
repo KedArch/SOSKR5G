@@ -41,6 +41,12 @@ fi
 if [ -z "$SCP_PORT" ]; then
     SCP_PORT=7777
 fi
+if [ -z "$NRF_ADDR" ]; then
+    NRF_ADDR=127.0.0.10
+fi
+if [ -z "$NRF_PORT" ]; then
+    NRF_PORT=7777
+fi
 if [ -z "$UPF_ADDR" ]; then
     UPF_ADDR=127.0.0.7
 fi
@@ -64,16 +70,16 @@ smf:
       - addr: $SUBNET_ADDR
     dns:
       - $DNS_ADDR
-    mtu: 1400
-    ctf:
-      enabled: auto
-    freeDiameter: /etc/freeDiameter/smf.conf
 
 scp:
     sbi:
       - addr: $SCP_ADDR
         port: $SCP_PORT
 
+nrf:
+    sbi:
+      - addr: $NRF_ADDR
+        port: $NRF_PORT
 
 upf:
     pfcp:

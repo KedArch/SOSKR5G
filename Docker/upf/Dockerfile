@@ -11,6 +11,7 @@ COPY setup.sh /root/setup.sh
 #ENV SUBNET_ADDR=
 #ENV METRICS_ADDR=
 #ENV METRICS_PORT=
+#ENV SMF_ADDR=
 
 RUN chmod +x /root/setup.sh
 

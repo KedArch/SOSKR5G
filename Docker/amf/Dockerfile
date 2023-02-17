@@ -18,6 +18,8 @@ COPY setup.sh /root/setup.sh
 #ENV NETWORK_NAME=
 #ENV SCP_ADDR=
 #ENV SCP_PORT=
+#ENV NRF_ADDR=
+#ENV NRF_PORT=
 
 RUN chmod +x /root/setup.sh
 

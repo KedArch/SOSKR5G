@@ -18,6 +18,12 @@ fi
 if [ -z "$SCP_PORT" ]; then
     SCP_PORT=7777
 fi
+if [ -z "$NRF_ADDR" ]; then
+    NRF_ADDR=127.0.0.10
+fi
+if [ -z "$NRF_PORT" ]; then
+    NRF_PORT=7777
+fi
 printf "db_uri: $DB_URI
 
 logger:
@@ -33,6 +39,10 @@ scp:
       - addr: $SCP_ADDR
         port: $SCP_PORT
 
+nrf:
+    sbi:
+      - addr: $NRF_ADDR
+        port: $NRF_PORT
 
 parameter:
 

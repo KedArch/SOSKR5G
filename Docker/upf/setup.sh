@@ -32,6 +32,9 @@ fi
 if [ -z "$METRICS_PORT" ]; then
     METRICS_PORT=9090
 fi
+if [ -z "$SMF_ADDR" ]; then
+    SMF_ADDR=127.0.0.4
+fi
 printf "logger:
     file: /var/log/open5gs/upf.log
 
@@ -47,6 +50,8 @@ upf:
         port: $METRICS_PORT
 
 smf:
+   pfcp:
+      addr: $SMF_ADDR
 
 parameter:
 
