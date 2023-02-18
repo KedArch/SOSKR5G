@@ -89,7 +89,7 @@ scp:
       - addr: $SCP_ADDR
         port: $SCP_PORT
 
-scp:
+nrf:
     sbi:
       - addr: $NRF_ADDR
         port: $NRF_PORT
