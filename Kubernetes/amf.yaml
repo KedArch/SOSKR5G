@@ -19,10 +19,6 @@ spec:
           image: amf:latest
           imagePullPolicy: Never
           env:
-            - name: AMF_ADDR
-              value: 0.0.0.0
-            - name: NGAP_ADDR
-              value: 0.0.0.0
             - name: MCC
               value: "001"
             - name: MNC
@@ -33,6 +29,8 @@ spec:
               value: scp-service
             - name: NRF_ADDR
               value: nrf-service
+          command: ["sh"]
+          args: ["-c", "export AMF_ADDR=`ip a show eth0 | grep inet | sed 's/ *//' | cut -d' ' -f2 | cut -d'/' -f1` && export NGAP_ADDR=$AMF_ADDR && /root/setup.sh"]
 ---
 apiVersion: v1
 kind: Service

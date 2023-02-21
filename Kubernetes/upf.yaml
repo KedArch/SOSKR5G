@@ -24,12 +24,10 @@ spec:
               #drop: ["all"]
               add: ["NET_ADMIN"]
           env:
-            - name: PFCP_ADDR
-              value: 0.0.0.0
-            - name: GTPU_ADDR
-              value: 0.0.0.0
             - name: SMF_ADDR
               value: smf-service
+          command: ["sh"]
+          args: ["-c", "export GTPU_ADDR=`ip a show eth0 | grep inet | sed 's/ *//' | cut -d' ' -f2 | cut -d'/' -f1` && export PFCP_ADDR=$GTPU_ADDR && /root/setup.sh"]
 ---
 apiVersion: v1
 kind: Service

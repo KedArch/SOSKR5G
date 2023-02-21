@@ -19,14 +19,6 @@ spec:
           image: smf:latest
           imagePullPolicy: Never
           env:
-            - name: SMF_ADDR
-              value: 0.0.0.0
-            - name: PFCP_ADDR
-              value: 0.0.0.0
-            - name: GTPC_ADDR
-              value: 0.0.0.0
-            - name: GTPU_ADDR
-              value: 0.0.0.0
             - name: DNS_ADDR
               value:
             - name: SCP_ADDR
@@ -35,6 +27,8 @@ spec:
               value: upf-service
             - name: NRF_ADDR
               value: nrf-service
+          command: ["sh"]
+          args: ["-c", "export SMF_ADDR=`ip a show eth0 | grep inet | sed 's/ *//' | cut -d' ' -f2 | cut -d'/' -f1` && export GTPU_ADDR=$SMF_ADDR && export GTPC_ADDR=$SMF_ADDR && export PFCP_ADDR=$SMF_ADDR && /root/setup.sh"]
 ---
 apiVersion: v1
 kind: Service

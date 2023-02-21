@@ -19,10 +19,11 @@ spec:
           image: nrf:latest
           imagePullPolicy: Never
           env:
-            - name: NRF_ADDR
-              value: 0.0.0.0
             - name: SCP_ADDR
               value: scp-service
+          command: ["sh"]
+          args: ["-c", "export NRF_ADDR=`ip a show eth0 | grep inet | sed 's/ *//' | cut -d' ' -f2 | cut -d'/' -f1` && /root/setup.sh"]
+
 ---
 apiVersion: v1
 kind: Service
