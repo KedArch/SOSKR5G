@@ -20,7 +20,7 @@ spec:
           name: db
         volumeMounts:
         - name: db-data
-          mountPath: /var/lib/mongodb
+          mountPath: /data/db
         env:
         - name: MONGO_INITDB_ROOT_USERNAME
           value:
