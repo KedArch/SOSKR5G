@@ -18,6 +18,9 @@ spec:
         - name: webui
           image: webui:latest
           imagePullPolicy: Never
+          env:
+          - name: DB_URI
+            value: mongodb://mongo-service/open5gs
 ---
 apiVersion: v1
 kind: Service
