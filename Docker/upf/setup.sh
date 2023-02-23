@@ -25,6 +25,21 @@ for I in $SUBNET_ADDR; do
 done
 ip link set ogstun up
 # github.com/open5gs/open5gs - modified
+POD_SUBNET=`ip a show eth0 | grep inet | sed 's/ *//' | cut -d' ' -f2`
+for I in $SUBNET_ADDR; do
+    case "$I" in
+        *:*)
+            IPTABLES=ip6tables
+            ;;
+        *)
+            IPTABLES=iptables
+            ;;
+    esac
+    $IPTABLES -t nat -A POSTROUTING -s $I ! -o ogstun -j MASQUERADE
+    $IPTABLES -I INPUT -s $I -j DROP
+    $IPTABLES -I FORWARD -s $I -d $POD_SUBNET -j DROP
+done
+iptables -I INPUT -i ogstun -j ACCEPT
 SUBNET_ADDR=`echo $SUBNET_ADDR | sed 's/ /\n      - addr: /g'`
 if [ -z "$METRICS_ADDR" ]; then
     METRICS_ADDR=127.0.0.7
