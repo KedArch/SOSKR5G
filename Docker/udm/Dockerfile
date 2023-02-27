@@ -1,9 +1,7 @@
 FROM baza:latest
 
-RUN add-apt-repository ppa:open5gs/latest && \
-    DEBIAN_FRONTEND=noninteractive \
-    apt-get install -y --no-install-recommends open5gs-udm && \
-    apt-get clean
+COPY --from=builder:latest /bin/open5gs-udmd /bin/open5gs-udmd
+COPY --from=builder:latest /lib/x86_64-linux-gnu /lib
 COPY setup.sh /root/setup.sh
 
 #ENV UDM_ADDR=

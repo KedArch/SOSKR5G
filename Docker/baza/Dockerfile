@@ -1,6 +1,7 @@
 FROM ubuntu:focal
 
-RUN apt-get update && \
+RUN mkdir -p /etc/open5gs /var/log/open5gs && \
+    apt-get update && \
     apt-get upgrade -y && \
     DEBIAN_FRONTEND=noninteractive \
     apt-get install -y --no-install-recommends \
