@@ -1,6 +1,6 @@
 FROM baza:latest
 
-COPY --from=builder:latest /bin/open5gs-amfd /bin/open5gs-amfd
+COPY --from=builder:latest /bin/open5gs-nssfd /bin/open5gs-nssfd
 COPY --from=builder:latest /lib/x86_64-linux-gnu /lib
 COPY setup.sh /root/setup.sh
 
