@@ -2,7 +2,8 @@
 build-all: build-baza build-builder build-amf build-ausf build-bsf build-nrf build-nssf build-pcf build-scp build-smf build-udm build-udr build-upf build-webui
 open5gs:
 	git clone https://github.com/KedArch/open5gs
-build-baza: build-baza
+	git checkout v2.6.0
+build-baza:
 	docker build --tag baza baza
 build-builder: build-baza open5gs
 	docker build --tag builder -f builder/Dockerfile .
