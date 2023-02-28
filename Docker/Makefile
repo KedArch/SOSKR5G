@@ -1,8 +1,8 @@
 .PHONY: build-all
-build-all: build-baza build-builder build-amf build-ausf build-bsf build-nrf build-nssf build-pcf build-scp build-smf build-udm build-udr build-upf build-webui
+build-all: open5gs build-baza build-builder build-amf build-ausf build-bsf build-nrf build-nssf build-pcf build-scp build-smf build-udm build-udr build-upf build-webui
 open5gs:
 	git clone https://github.com/KedArch/open5gs
-	git checkout v2.6.0
+	git -C open5gs checkout v2.6.0
 build-baza:
 	docker build --tag baza baza
 build-builder: build-baza open5gs
