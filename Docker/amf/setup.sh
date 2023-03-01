@@ -45,7 +45,7 @@ fi
 if [ -z "$NRF_PORT" ]; then
     NRF_PORT=7777
 fi
-POINTER=`echo $HOSTNAME | cut -d"-" -f2`
+POINTER=`echo $HOSTNAME`
 printf "logger:
     file: /var/log/open5gs/amf.log
 
