@@ -1,8 +1,5 @@
 #!/bin/sh
 CONFIG=/etc/open5gs/ausf.yaml
-if ! [ -f "$CONFIG-original" ]; then
-    mv $CONFIG $CONFIG-original
-fi
 if [ -z "$AUSF_ADDR" ]; then
     AUSF_ADDR=127.0.0.11
 fi

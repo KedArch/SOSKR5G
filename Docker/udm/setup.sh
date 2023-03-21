@@ -1,8 +1,5 @@
 #!/bin/sh
 CONFIG=/etc/open5gs/udm.yaml
-if ! [ -f "$CONFIG-original" ]; then
-    mv $CONFIG $CONFIG-original
-fi
 if [ -z "$UDM_ADDR" ]; then
     UDM_ADDR=127.0.0.12
 fi

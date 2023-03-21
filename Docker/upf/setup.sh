@@ -1,8 +1,5 @@
 #!/bin/sh
 CONFIG=/etc/open5gs/upf.yaml
-if ! [ -f "$CONFIG-original" ]; then
-    mv $CONFIG $CONFIG-original
-fi
 if [ -z "$PFCP_ADDR" ]; then
     PFCP_ADDR=127.0.0.7
 fi

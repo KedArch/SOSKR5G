@@ -1,8 +1,5 @@
 #!/bin/sh
 CONFIG=/etc/open5gs/amf.yaml
-if ! [ -f "$CONFIG-original" ]; then
-    mv $CONFIG $CONFIG-original
-fi
 if [ -z "$AMF_ADDR" ]; then
     AMF_ADDR=127.0.0.5
 fi

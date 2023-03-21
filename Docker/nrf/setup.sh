@@ -1,8 +1,5 @@
 #!/bin/sh
 CONFIG=/etc/open5gs/nrf.yaml
-if ! [ -f "$CONFIG-original" ]; then
-    mv $CONFIG $CONFIG-original
-fi
 if [ -z "$NRF_ADDR" ]; then
     NRF_ADDR="127.0.0.10 ::1"
 fi

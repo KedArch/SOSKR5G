@@ -1,8 +1,5 @@
 #!/bin/sh
 CONFIG=/etc/open5gs/pcf.yaml
-if ! [ -f "$CONFIG-original" ]; then
-    mv $CONFIG $CONFIG-original
-fi
 if [ -z "$DB_URI" ]; then
     DB_URI=mongodb://localhost/open5gs
 fi

@@ -1,8 +1,5 @@
 #!/bin/sh
 CONFIG=/etc/open5gs/nssf.yaml
-if ! [ -f "$CONFIG-original" ]; then
-    mv $CONFIG $CONFIG-original
-fi
 if [ -z "$NSSF_ADDR" ]; then
     NSSF_ADDR=127.0.0.14
 fi

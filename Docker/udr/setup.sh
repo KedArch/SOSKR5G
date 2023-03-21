@@ -1,8 +1,5 @@
 #!/bin/sh
 CONFIG=/etc/open5gs/udr.yaml
-if ! [ -f "$CONFIG-original" ]; then
-    mv $CONFIG $CONFIG-original
-fi
 if [ -z "$DB_URI" ]; then
     DB_URI=mongodb://localhost/open5gs
 fi
@@ -51,5 +48,3 @@ max:
 time:
 " > $CONFIG
 /bin/open5gs-udrd
-
-

@@ -1,8 +1,5 @@
 #!/bin/sh
 CONFIG=/etc/open5gs/smf.yaml
-if ! [ -f "$CONFIG-original" ]; then
-    mv $CONFIG $CONFIG-original
-fi
 if [ -z "$SMF_ADDR" ]; then
     SMF_ADDR=127.0.0.4
 fi
