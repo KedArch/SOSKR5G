@@ -11,6 +11,9 @@ COPY setup.sh /root/setup.sh
 #ENV METRICS_ADDR=
 #ENV METRICS_PORT=
 #ENV SMF_ADDR=
+#ENV LOG_ADDR=
+#ENV LOG_PORT=
+#ENV USE_UDP=
 
 RUN chmod +x /root/setup.sh
 

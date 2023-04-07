@@ -32,5 +32,6 @@ RUN mkdir -p /etc/open5gs /var/log/open5gs && \
         ca-certificates \
         netbase \
         pkg-config \
-        software-properties-common && \
+        software-properties-common \
+        rsyslog && \
     apt-get clean

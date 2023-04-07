@@ -39,4 +39,21 @@ max:
 
 time:
 " > $CONFIG
+if [ -n "$LOG_ADDR" ] && [ -n "$LOG_PORT" ]; then
+if [ -z "$USE_UDP" ]; then
+    PROTOCOL="@@"
+else
+    PROTOCOL="@"
+fi
+printf "\$ModLoad imfile
+\$InputFileName /var/log/open5gs/scp.log
+\$InputFileTag scp-info
+\$InputFileStateFile stat-scp-info
+\$InputFileSeverity info
+\$InputFileFacility local3
+\$InputRunFileMonitor
+local3.* $PROTOCOL$LOG_ADDR:$LOG_PORT;RSYSLOG_SyslogProtocol23Format" > /etc/rsyslog.d/00-logger.conf
+sed -i "s/^module(load=\"imklog\"/#module(load=\"imklog\"/" /etc/rsyslog.conf
+/usr/sbin/rsyslogd &
+fi
 /bin/open5gs-scpd

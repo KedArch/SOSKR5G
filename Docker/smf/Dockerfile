@@ -18,6 +18,9 @@ COPY setup.sh /root/setup.sh
 #ENV NRF_ADDR=
 #ENV NRF_PORT=
 #ENV UPF_ADDR=
+#ENV LOG_ADDR=
+#ENV LOG_PORT=
+#ENV USE_UDP=
 
 RUN chmod +x /root/setup.sh
 

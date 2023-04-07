@@ -23,6 +23,10 @@ spec:
               value: scp-service
             - name: NRF_ADDR
               value: nrf-service
+            - name: LOG_ADDR
+              value: "192.168.39.1" # logger server address
+            - name: LOG_PORT
+              value: "1514"
           command: ["sh"]
           args: ["-c", "export AUSF_ADDR=`ip a show eth0 | grep inet | sed 's/ *//' | cut -d' ' -f2 | cut -d'/' -f1` && /root/setup.sh"]
 ---
