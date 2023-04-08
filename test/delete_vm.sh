@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 export WORKDIR=$(realpath $(dirname $0))
 if [ -z $1 ]; then
-    printf "Name is empty!"
+    printf "Name is empty!\n"
     exit 1
 fi
 if [ -z "$(virsh list --all | grep $1)" ]; then
-    printf "VM named $1 is undefined, trying to delete its files anyway"
+    printf "VM named $1 is undefined, trying to delete its files anyway\n"
 else
     virsh destroy $1
     virsh undefine $1
