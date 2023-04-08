@@ -1,29 +1,26 @@
 #!/usr/bin/env bash
 set -euo pipefail
-export IFS=""
 export WORKDIR=$(realpath $(dirname $0))
-export NAME=$1
-export IPE=$2
-if [ -z $NAME ]; then
+if [ -z $1 ]; then
     printf "1 argument Name is empty!\n"
     exit 1
 fi
-if [ -z $IPE ]; then
-    printf "2 argument IPE (fourth IP address octet value for internal interface) is empty!\n"
+if [ -z $2 ]; then
+    printf "2 argument (fourth IP address octet value for internal interface) is empty!\n"
     exit 1
 fi
-if [ -n "$(virsh list --all | grep $NAME)" ]; then
-    printf "VM named $NAME already exist\n"
+if [ -n "$(virsh list --all | grep $1)" ]; then
+    printf "VM named $1 already exist\n"
     exit 2
 fi 
 cd /var/lib/libvirt/images
 if ! [ -f focal-server-cloudimg-amd64.img ]; then
     wget http://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img
 fi
-qemu-img create -b focal-server-cloudimg-amd64.img -f qcow2 -F qcow2 $NAME.img 10G
+qemu-img create -b focal-server-cloudimg-amd64.img -f qcow2 -F qcow2 $1.img 10G
 cd $WORKDIR
-printf "instance-id: $NAME
-local-hostname: $NAME\n" > meta-data
+printf "instance-id: $1
+local-hostname: $1\n" > meta-data
 export PUBKEYS=
 while read -r line; do
     PUBKEYS="\n     - $line$PUBKEYS"
@@ -44,17 +41,17 @@ ethernets:
         dhcp4: true
         dhcp6: true
     enp0s3:
-      addresses: [192.168.39.$IPE/24]
+      addresses: [192.168.39.$2/24]
       dhcp6: false
       dhcp4: false\n" > network-config
-genisoimage -output cidata-$NAME.iso -V cidata -r -J user-data meta-data network-config
+genisoimage -output cidata-$1.iso -V cidata -r -J user-data meta-data network-config
 mkdir -p vm-conf
-mv meta-data vm-conf/meta-data-$NAME
-mv user-data vm-conf/user-data-$NAME
-mv network-config vm-conf/network-config-$NAME
-mv cidata-$NAME.iso /var/lib/libvirt/images
-cp vm.xml vm-conf/vm-$NAME.xml
-sed -i "s/vm-name/$NAME/g" vm-conf/vm-$NAME.xml
-virsh define vm-conf/vm-$NAME.xml
-virsh autostart $NAME
-virsh start $NAME
+mv meta-data vm-conf/meta-data-$1
+mv user-data vm-conf/user-data-$1
+mv network-config vm-conf/network-config-$1
+mv cidata-$1.iso /var/lib/libvirt/images
+cp vm.xml vm-conf/vm-$1.xml
+sed -i "s/vm-name/$1/g" vm-conf/vm-$1.xml
+virsh define vm-conf/vm-$1.xml
+virsh autostart $1
+virsh start $1
