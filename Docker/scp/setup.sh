@@ -47,8 +47,8 @@ else
 fi
 printf "\$ModLoad imfile
 \$InputFileName /var/log/open5gs/scp.log
-\$InputFileTag scp-info
-\$InputFileStateFile stat-scp-info
+\$InputFileTag scp
+\$InputFileStateFile stat-scp
 \$InputFileSeverity info
 \$InputFileFacility local3
 \$InputRunFileMonitor

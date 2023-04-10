@@ -107,8 +107,8 @@ else
 fi
 printf "\$ModLoad imfile
 \$InputFileName /var/log/open5gs/amf.log
-\$InputFileTag amf-info
-\$InputFileStateFile stat-amf-info
+\$InputFileTag amf
+\$InputFileStateFile stat-amf
 \$InputFileSeverity info
 \$InputFileFacility local3
 \$InputRunFileMonitor
