@@ -50,8 +50,8 @@ else
 fi
 printf "\$ModLoad imfile
 \$InputFileName /var/log/open5gs/ausf.log
-\$InputFileTag ausf-info
-\$InputFileStateFile stat-ausf-info
+\$InputFileTag ausf
+\$InputFileStateFile stat-ausf
 \$InputFileSeverity info
 \$InputFileFacility local3
 \$InputRunFileMonitor

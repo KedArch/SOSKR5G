@@ -79,8 +79,8 @@ else
 fi
 printf "\$ModLoad imfile
 \$InputFileName /var/log/open5gs/upf.log
-\$InputFileTag upf-info
-\$InputFileStateFile stat-upf-info
+\$InputFileTag upf
+\$InputFileStateFile stat-upf
 \$InputFileSeverity info
 \$InputFileFacility local3
 \$InputRunFileMonitor
