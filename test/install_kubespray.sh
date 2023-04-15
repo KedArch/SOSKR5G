@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 cd $(dirname $(realpath $0))
 cd ../..
-git clone https://github.com/KedArch/SOSKR5G-kubespray
+git clone https://github.com/kubernetes-sigs/kubespray
 VENVDIR=kubespray-venv
 KUBESPRAYDIR=kubespray
 ANSIBLE_VERSION=2.12
