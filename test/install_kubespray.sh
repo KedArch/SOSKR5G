@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 cd $(dirname $(realpath $0))
 cd ../..
-git clone https://github.com/kubernetes-sigs/kubespray
+git clone git@github.com:KedArch/SOSKR5G-kubespray.git
 VENVDIR=kubespray-venv
 KUBESPRAYDIR=kubespray
 ANSIBLE_VERSION=2.12
@@ -9,5 +9,4 @@ ANSIBLE_VERSION=2.12
 source $VENVDIR/bin/activate
 cd $KUBESPRAYDIR
 pip install -U -r requirements-$ANSIBLE_VERSION.txt
-cp -r SOSKR5G/test/5gcore
 #ansible-playbook -i inventory/5gcore/hosts.yaml cluster.yml -b -v --private-key=~/.ssh/id_rsa -u user
