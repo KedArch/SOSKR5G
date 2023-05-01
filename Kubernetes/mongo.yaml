@@ -36,6 +36,7 @@ spec:
       resources:
         requests:
           storage: 1Gi
+      storageClassName: ""
 ---
 apiVersion: v1
 kind: Service
