@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: udr
-          image: udr:latest
+          image: 192.168.39.1:5000/udr:latest
           imagePullPolicy: Always
           env:
             - name: DB_URI

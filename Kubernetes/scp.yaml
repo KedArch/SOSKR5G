@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: scp
-          image: scp:latest
+          image: 192.168.39.1:5000/scp:latest
           imagePullPolicy: Always
           env:
             - name: DB_URI

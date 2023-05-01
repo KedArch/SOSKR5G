@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: pcf
-          image: pcf:latest
+          image: 192.168.39.1:5000/pcf:latest
           imagePullPolicy: Always
           env:
             - name: DB_URI

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: amf
-          image: amf:latest
+          image: 192.168.39.1:5000/amf:latest
           imagePullPolicy: Always
           env:
             - name: MCC

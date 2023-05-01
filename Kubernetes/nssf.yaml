@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: nssf
-          image: nssf:latest
+          image: 192.168.39.1:5000/nssf:latest
           imagePullPolicy: Always
           env:
             - name: NSI_ADDR

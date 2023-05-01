@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: smf
-          image: smf:latest
+          image: 192.168.39.1:5000/smf:latest
           imagePullPolicy: Always
           env:
             - name: DNS_ADDR

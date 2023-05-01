@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: upf
-          image: upf:latest
+          image: 192.168.39.1:5000/upf:latest
           imagePullPolicy: Always
           securityContext:
             #privileged: true

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: nrf
-          image: nrf:latest
+          image: 192.168.39.1:5000/nrf:latest
           imagePullPolicy: Always
           env:
             - name: SCP_ADDR

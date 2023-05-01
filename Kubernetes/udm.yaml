@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: udm
-          image: udm:latest
+          image: 192.168.39.1:5000/udm:latest
           imagePullPolicy: Always
           env:
             - name: SCP_ADDR
