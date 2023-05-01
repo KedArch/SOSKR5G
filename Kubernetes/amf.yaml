@@ -17,7 +17,7 @@ spec:
       containers:
         - name: amf
           image: amf:latest
-          imagePullPolicy: Never
+          imagePullPolicy: Always
           env:
             - name: MCC
               value: "001"
@@ -34,7 +34,7 @@ spec:
             - name: LOG_PORT
               value: "1514"
           command: ["sh"]
-          args: ["-c", "export AMF_ADDR=`ip a show eth0 | grep inet | sed 's/ *//' | cut -d' ' -f2 | cut -d'/' -f1` && export NGAP_ADDR=$AMF_ADDR && /root/setup.sh"]
+          args: ["-c", "export AMF_ADDR=`ip a show eth0 | grep \"inet[^6]\" | sed 's/ *//' | cut -d' ' -f2 | cut -d'/' -f1` && export NGAP_ADDR=$AMF_ADDR && /root/setup.sh"]
 ---
 apiVersion: v1
 kind: Service
