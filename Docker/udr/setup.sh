@@ -55,7 +55,7 @@ else
 fi
 printf "\$ModLoad imfile
 \$InputFileName /var/log/open5gs/udr.log
-\$InputFileTag udr
+\$InputFileTag open5gs-udr
 \$InputFileStateFile stat-udr
 \$InputFileSeverity info
 \$InputFileFacility local3

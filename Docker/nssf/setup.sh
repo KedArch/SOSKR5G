@@ -61,7 +61,7 @@ else
 fi
 printf "\$ModLoad imfile
 \$InputFileName /var/log/open5gs/nssf.log
-\$InputFileTag nssf
+\$InputFileTag open5gs-nssf
 \$InputFileStateFile stat-nssf
 \$InputFileSeverity info
 \$InputFileFacility local3

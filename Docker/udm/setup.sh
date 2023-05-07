@@ -50,7 +50,7 @@ else
 fi
 printf "\$ModLoad imfile
 \$InputFileName /var/log/open5gs/udm.log
-\$InputFileTag udm
+\$InputFileTag open5gs-udm
 \$InputFileStateFile stat-udm
 \$InputFileSeverity info
 \$InputFileFacility local3

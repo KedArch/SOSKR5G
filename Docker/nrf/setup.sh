@@ -41,7 +41,7 @@ else
 fi
 printf "\$ModLoad imfile
 \$InputFileName /var/log/open5gs/nrf.log
-\$InputFileTag nrf
+\$InputFileTag open5gs-nrf
 \$InputFileStateFile stat-nrf
 \$InputFileSeverity info
 \$InputFileFacility local3

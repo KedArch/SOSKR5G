@@ -55,7 +55,7 @@ else
 fi
 printf "\$ModLoad imfile
 \$InputFileName /var/log/open5gs/bsf.log
-\$InputFileTag bsf
+\$InputFileTag open5gs-bsf
 \$InputFileStateFile stat-bsf
 \$InputFileSeverity info
 \$InputFileFacility local3
