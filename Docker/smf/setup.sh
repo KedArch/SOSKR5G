@@ -96,7 +96,7 @@ else
 fi
 printf "\$ModLoad imfile
 \$InputFileName /var/log/open5gs/smf.log
-\$InputFileTag smf
+\$InputFileTag open5gs-smf
 \$InputFileStateFile stat-smf
 \$InputFileSeverity info
 \$InputFileFacility local3

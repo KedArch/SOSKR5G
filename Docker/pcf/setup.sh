@@ -64,7 +64,7 @@ else
 fi
 printf "\$ModLoad imfile
 \$InputFileName /var/log/open5gs/pcf.log
-\$InputFileTag pcf
+\$InputFileTag open5gs-pcf
 \$InputFileStateFile stat-pcf
 \$InputFileSeverity info
 \$InputFileFacility local3
