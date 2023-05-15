@@ -2,6 +2,9 @@
   <name>vm-name</name>
   <memory unit='KiB'>2097152</memory>
   <vcpu placement='static'>2</vcpu>
+  <cpu mode='host-model' check='none'>
+    <model fallback='forbid'>qemu64</model>
+  </cpu>
   <os>
     <type arch='x86_64' machine='pc-i440fx-2.11'>hvm</type>
     <boot dev='hd'/>
