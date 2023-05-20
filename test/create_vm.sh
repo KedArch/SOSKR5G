@@ -30,7 +30,10 @@ while read -r line; do
     PUBKEYS="\n     - $line$PUBKEYS"
 done < pubkeys
 printf "#cloud-config
-
+package_update: true
+package_upgrade: false
+packages:
+  - nfs-common
 users:
   - name: user
     groups: wheel
