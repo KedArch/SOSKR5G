@@ -9,6 +9,10 @@ if [ -z $2 ]; then
     printf "2 argument (fourth IP address octet value for internal interface) is empty!\n"
     exit 1
 fi
+if [ -z $3 ]; then
+    printf "3 argument (VM disk size) is empty!\n"
+    exit 1
+fi
 if [ -n "$(virsh list --all | grep $1)" ]; then
     printf "VM named $1 already exist\n"
     exit 2
@@ -17,7 +21,7 @@ cd /var/lib/libvirt/images
 if ! [ -f focal-server-cloudimg-amd64.img ]; then
     wget http://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img
 fi
-qemu-img create -b focal-server-cloudimg-amd64.img -f qcow2 -F qcow2 $1.img 10G
+qemu-img create -b focal-server-cloudimg-amd64.img -f qcow2 -F qcow2 "$1.img" "$3"
 cd $WORKDIR
 printf "instance-id: $1
 local-hostname: $1\n" > meta-data
