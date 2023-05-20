@@ -41,7 +41,7 @@ ethernets:
         dhcp4: true
         dhcp6: true
     enp0s3:
-      addresses: [192.168.39.$2/24]
+      addresses: [192.168.39.$2/24 fc00::$2/120]
       dhcp6: false
       dhcp4: false\n" > network-config
 genisoimage -output cidata-$1.iso -V cidata -r -J user-data meta-data network-config
