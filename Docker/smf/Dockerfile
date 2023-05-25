@@ -1,7 +1,7 @@
 FROM baza:latest
 
-COPY --from=builder:latest /bin/open5gs-smfd /bin/open5gs-smfd
 COPY --from=builder:latest /lib/x86_64-linux-gnu /lib
+COPY --from=builder:latest /bin/open5gs-smfd /bin/open5gs-smfd
 COPY setup.sh /root/setup.sh
 
 #ENV SMF_ADDR=

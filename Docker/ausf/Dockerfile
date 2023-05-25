@@ -1,7 +1,7 @@
 FROM baza:latest
 
-COPY --from=builder:latest /bin/open5gs-ausfd /bin/open5gs-ausfd
 COPY --from=builder:latest /lib/x86_64-linux-gnu /lib
+COPY --from=builder:latest /bin/open5gs-ausfd /bin/open5gs-ausfd
 COPY setup.sh /root/setup.sh
 
 #ENV AUSF_ADDR=
