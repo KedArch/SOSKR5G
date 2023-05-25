@@ -1,7 +1,7 @@
 FROM baza:latest
 
-COPY --from=builder:latest /bin/open5gs-udmd /bin/open5gs-udmd
 COPY --from=builder:latest /lib/x86_64-linux-gnu /lib
+COPY --from=builder:latest /bin/open5gs-udmd /bin/open5gs-udmd
 COPY setup.sh /root/setup.sh
 
 #ENV UDM_ADDR=

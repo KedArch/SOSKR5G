@@ -1,7 +1,7 @@
 FROM baza:latest
 
-COPY --from=builder:latest /bin/open5gs-nrfd /bin/open5gs-nrfd
 COPY --from=builder:latest /lib/x86_64-linux-gnu /lib
+COPY --from=builder:latest /bin/open5gs-nrfd /bin/open5gs-nrfd
 COPY setup.sh /root/setup.sh
 
 #ENV NRF_ADDR=

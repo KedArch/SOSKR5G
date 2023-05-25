@@ -1,7 +1,7 @@
 FROM baza:latest
 
-COPY --from=builder:latest /bin/open5gs-nssfd /bin/open5gs-nssfd
 COPY --from=builder:latest /lib/x86_64-linux-gnu /lib
+COPY --from=builder:latest /bin/open5gs-nssfd /bin/open5gs-nssfd
 COPY setup.sh /root/setup.sh
 
 #ENV NSSF_ADDR=
