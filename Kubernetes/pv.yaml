@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nfs
+  name: nfs-mongo
 spec:
   capacity:
     storage: 1Gi
   accessModes:
     - ReadWriteOnce
-    - ReadWriteMany
   nfs:
     server: 192.168.39.1
-    path: /srv/nfs
+    path: /srv/nfs/mongo
+  storageClassName: "mongo"

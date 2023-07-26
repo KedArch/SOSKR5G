@@ -14,13 +14,13 @@ spec:
     spec:
       containers:
       - name: mongo
-        image: mongo:5.0.15
+        image: mongo:6.0.8
         ports:
         - containerPort: 27017
           name: db
         volumeMounts:
-        - name: db-data
-          mountPath: /data
+        - name: mongo-pvc
+          mountPath: /data/db
         env:
         - name: MONGO_INITDB_ROOT_USERNAME
           value:
@@ -30,13 +30,14 @@ spec:
           value: open5gs
   volumeClaimTemplates:
   - metadata:
-      name: db-data
+      name: mongo-pvc
     spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:
         requests:
           storage: 1Gi
-      storageClassName: ""
+      storageClassName: "mongo"
+
 ---
 apiVersion: v1
 kind: Service
