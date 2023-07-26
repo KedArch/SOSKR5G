@@ -19,7 +19,7 @@ spec:
           image: 192.168.39.1:5000/upf:latest
           imagePullPolicy: Always
           securityContext:
-            #privileged: true
+            privileged: true
             capabilities:
               #drop: ["all"]
               add: ["NET_ADMIN"]
@@ -31,7 +31,7 @@ spec:
             - name: LOG_PORT
               value: "1514"
           command: ["sh"]
-          args: ["-c", "export GTPU_ADDR=`ip a show eth0 | grep \"inet[^6]\" | sed 's/ *//' | cut -d' ' -f2 | cut -d'/' -f1` && export PFCP_ADDR=$GTPU_ADDR && /root/setup.sh && sysctl -w net.ipv4.ip_forward=1"]
+          args: ["-c", "export GTPU_ADDR=`ip a show eth0 | grep \"inet[^6]\" | sed 's/ *//' | cut -d' ' -f2 | cut -d'/' -f1` && export PFCP_ADDR=$GTPU_ADDR && sysctl -w net.ipv4.ip_forward=1 && /root/setup.sh"]
 ---
 apiVersion: v1
 kind: Service
