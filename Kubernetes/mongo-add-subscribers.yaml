@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mongo-add-subscribers
+spec:
+  restartPolicy: OnFailure
+  containers:
+  - name: mongo-add-subscribers
+    image: mongo:6.0.8
+    command: ["/bin/sh", "-c"]
+    args: ["apt-get update && apt-get install -y wget && wget https://raw.githubusercontent.com/KedArch/open5gs/main/misc/db/open5gs-dbctl && export DB_URI=\"mongodb://mongo-service/open5gs\" && bash open5gs-dbctl add 001010000000001 465B5CE8B199B49FAA5F0A2EE238A6BC E8ED289DEBA952E4283B54E88E6183CA && bash open5gs-dbctl add 001010000000002 465B5CE8B199B49FAA5F0A2EE238A6BC E8ED289DEBA952E4283B54E88E6183CA && bash open5gs-dbctl add 001010000000003 465B5CE8B199B49FAA5F0A2EE238A6BC E8ED289DEBA952E4283B54E88E6183CA && bash open5gs-dbctl add 001010000000004 465B5CE8B199B49FAA5F0A2EE238A6BC E8ED289DEBA952E4283B54E88E6183CA"]
