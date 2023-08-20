@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nrf
+  labels:
+    5g: nrf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      5g: nrf
+  template:
+    metadata:
+      labels:
+        5g: nrf
+        pfcp: master
+    spec:
+      containers:
+        - name: nrf
+          image: 192.168.39.1:5000/nrf:latest
+          imagePullPolicy: Always
+          env:
+            - name: SCP_ADDR
+              value: scp-service
+            - name: LOG_ADDR
+              value: "192.168.39.1" # logger server address
+            - name: LOG_PORT
+              value: "1514"
+          command: ["sh"]
+          args: ["-c", "export NRF_ADDR=`ip a show eth0 | grep \"inet[^6]\" | sed 's/ *//' | cut -d' ' -f2 | cut -d'/' -f1` && /root/setup.sh"]
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nrf-service
+spec:
+  type: ClusterIP
+  selector:
+    5g: nrf
+  ports:
+    - protocol: TCP
+      port: 7777
+      targetPort: 7777

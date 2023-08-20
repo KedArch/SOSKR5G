@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smf
+  labels:
+    5g: smf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      5g: smf
+  template:
+    metadata:
+      labels:
+        5g: smf
+    spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: pfcp
+                operator: In
+                values:
+                - master
+            topologyKey: kubernetes.io/hostname
+      containers:
+        - name: smf
+          image: 192.168.39.1:5000/smf:latest
+          imagePullPolicy: Always
+          env:
+            - name: DNS_ADDR
+              value:
+            - name: SCP_ADDR
+              value: scp-service
+            - name: UPF_ADDR
+              value: upf-service
+            - name: NRF_ADDR
+              value: nrf-service
+            - name: LOG_ADDR
+              value: "192.168.39.1" # logger server address
+            - name: LOG_PORT
+              value: "1514"
+          command: ["sh"]
+          args: ["-c", "export SMF_ADDR=`ip a show eth0 | grep \"inet[^6]\" | sed 's/ *//' | cut -d' ' -f2 | cut -d'/' -f1` && export GTPU_ADDR=$SMF_ADDR && export GTPC_ADDR=$SMF_ADDR && export PFCP_ADDR=$SMF_ADDR && /root/setup.sh"]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: smf-service
+spec:
+  type: ClusterIP
+  selector:
+    5g: smf
+  ports:
+    - protocol: UDP
+      port: 2123
+      targetPort: 2123
+      name: gtpc
+    - protocol: UDP
+      port: 2152
+      targetPort: 2152
+      name: gtpu
+    - protocol: UDP
+      port: 8805
+      targetPort: 8805
+      name: pfcp
+    - protocol: TCP
+      port: 7777
+      targetPort: 7777
+      name: sbi
