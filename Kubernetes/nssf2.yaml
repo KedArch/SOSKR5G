@@ -24,7 +24,7 @@ spec:
             - name: NRF_ADDR
               value: nrf-service
             - name: SD
-              value: 2
+              value: "2"
             - name: LOG_ADDR
               value: "192.168.39.1" # logger server address
             - name: LOG_PORT
