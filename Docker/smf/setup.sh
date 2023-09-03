@@ -47,6 +47,15 @@ fi
 if [ -z "$UPF_ADDR" ]; then
     UPF_ADDR=127.0.0.7
 fi
+if [ -z "$SST" ]; then
+    SST=1
+fi
+if [ -z "$SD" ]; then
+    SD=1
+fi
+if [ -z "$DNN" ]; then
+    DNN=internet
+fi
 printf "logger:
     file: /var/log/open5gs/smf.log
 
@@ -67,6 +76,12 @@ smf:
       - addr: $SUBNET_ADDR
     dns:
       - $DNS_ADDR
+    info:
+      - s_nssai:
+          - sst: $SSD
+            sd: $SD
+            dnn:
+              - $DNN
 
 scp:
     sbi:

@@ -24,6 +24,12 @@ fi
 if [ -z "$NRF_PORT" ]; then
     NRF_PORT=7777
 fi
+if [ -z "$SST" ]; then
+    SST=1
+fi
+if [ -z "$SD" ]; then
+    SD=1
+fi
 printf "logger:
     file: /var/log/open5gs/nssf.log
 
@@ -35,7 +41,8 @@ nssf:
       - addr: $NSI_ADDR
         port: $NSI_PORT
         s_nssai:
-          sst: 1
+          sst: $SST
+          sd: $SD
 
 scp:
     sbi:

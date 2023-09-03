@@ -1,42 +1,45 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nrf
+  name: nssf2
   labels:
-    5g: nrf
+    5g: nssf2
 spec:
   replicas: 1
   selector:
     matchLabels:
-      5g: nrf
+      5g: nssf2
   template:
     metadata:
       labels:
-        5g: nrf
+        5g: nssf2
     spec:
       containers:
-        - name: nrf
-          image: 192.168.39.1:5000/nrf:latest
+        - name: nssf
+          image: 192.168.39.1:5000/nssf:latest
           imagePullPolicy: Always
           env:
             - name: SCP_ADDR
               value: scp-service
+            - name: NRF_ADDR
+              value: nrf-service
+            - name: SD
+              value: 2
             - name: LOG_ADDR
               value: "192.168.39.1" # logger server address
             - name: LOG_PORT
               value: "1514"
           command: ["sh"]
-          args: ["-c", "export NRF_ADDR=`ip a show eth0 | grep \"inet[^6]\" | sed 's/ *//' | cut -d' ' -f2 | cut -d'/' -f1` && /root/setup.sh"]
-
+          args: ["-c", "export NSSF_ADDR=`ip a show eth0 | grep \"inet[^6]\" | sed 's/ *//' | cut -d' ' -f2 | cut -d'/' -f1` && export NSI_ADDR=$NSSF_ADDR && /root/setup.sh"]
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: nrf-service
+  name: nssf-service
 spec:
   type: ClusterIP
   selector:
-    5g: nrf
+    5g: nssf2
   ports:
     - protocol: TCP
       port: 7777

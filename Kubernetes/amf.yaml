@@ -29,6 +29,8 @@ spec:
               value: scp-service
             - name: NRF_ADDR
               value: nrf-service
+            - name: S_NSSAI
+              value: "1 1;1 2"
             - name: LOG_ADDR
               value: "192.168.39.1" # logger server address
             - name: LOG_PORT

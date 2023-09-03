@@ -1,21 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: smf
+  name: smf2
   labels:
-    5g: smf
+    5g: smf2
 spec:
   replicas: 1
   selector:
     matchLabels:
-      5g: smf
+      5g: smf2
   template:
     metadata:
       labels:
-        5g: smf
+        5g: smf2
     spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: pfcp
+                operator: In
+                values:
+                - master
+            topologyKey: kubernetes.io/hostname
       containers:
-        - name: smf
+        - name: smf2
           image: 192.168.39.1:5000/smf:latest
           imagePullPolicy: Always
           env:
@@ -27,6 +37,8 @@ spec:
               value: upf-service
             - name: NRF_ADDR
               value: nrf-service
+            - name: SD
+              value: 2
             - name: LOG_ADDR
               value: "192.168.39.1" # logger server address
             - name: LOG_PORT
@@ -41,7 +53,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    5g: smf
+    5g: smf2
   ports:
     - protocol: UDP
       port: 2123

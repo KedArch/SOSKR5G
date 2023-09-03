@@ -19,8 +19,6 @@ spec:
           image: 192.168.39.1:5000/nssf:latest
           imagePullPolicy: Always
           env:
-            - name: NSI_ADDR
-              value: nrf-service
             - name: SCP_ADDR
               value: scp-service
             - name: NRF_ADDR
@@ -30,7 +28,7 @@ spec:
             - name: LOG_PORT
               value: "1514"
           command: ["sh"]
-          args: ["-c", "export NSSF_ADDR=`ip a show eth0 | grep \"inet[^6]\" | sed 's/ *//' | cut -d' ' -f2 | cut -d'/' -f1` && /root/setup.sh"]
+          args: ["-c", "export NSSF_ADDR=`ip a show eth0 | grep \"inet[^6]\" | sed 's/ *//' | cut -d' ' -f2 | cut -d'/' -f1` && export NSI_ADDR=$NSSF_ADDR && /root/setup.sh"]
 ---
 apiVersion: v1
 kind: Service

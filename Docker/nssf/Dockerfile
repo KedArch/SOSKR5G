@@ -12,6 +12,8 @@ COPY setup.sh /root/setup.sh
 #ENV SCP_ADDR=
 #ENV NRF_PORT=
 #ENV NRF_PORT=
+#ENV SST=
+#ENV SD=
 #ENV LOG_ADDR=
 #ENV LOG_PORT=
 #ENV USE_UDP=

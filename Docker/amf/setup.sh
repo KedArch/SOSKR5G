@@ -42,6 +42,13 @@ fi
 if [ -z "$NRF_PORT" ]; then
     NRF_PORT=7777
 fi
+if [ -z "$TAC" ]; then
+    TAC=1
+fi
+if [ -z "$S_NSSAI" ]; then
+    S_NSSAI=1
+fi
+S_NSSAI=`echo $S_NSSAI | sed 's/ /\n            sd: /g' | sed 's/;/\n          - sst: /g'`
 POINTER=`echo $HOSTNAME`
 printf "logger:
     file: /var/log/open5gs/amf.log
@@ -67,13 +74,13 @@ amf:
       - plmn_id:
           mcc: $MCC
           mnc: $MNC
-        tac: 1
+        tac: $TAC
     plmn_support:
       - plmn_id:
           mcc: $MCC
           mnc: $MNC
         s_nssai:
-          - sst: 1
+          - sst: $S_NSSAI
     security:
         integrity_order : [ NIA2, NIA1, NIA0 ]
         ciphering_order : [ NEA0, NEA1, NEA2 ]
