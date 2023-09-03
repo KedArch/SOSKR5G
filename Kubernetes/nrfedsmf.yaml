@@ -37,6 +37,10 @@ spec:
               value: upf-service
             - name: NRF_ADDR
               value: nrf-service
+            - name: MCC
+              value: "001"
+            - name: MNC
+              value: "01"
             - name: LOG_ADDR
               value: "192.168.39.1" # logger server address
             - name: LOG_PORT
