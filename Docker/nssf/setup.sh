@@ -28,7 +28,7 @@ if [ -z "$SST" ]; then
     SST=1
 fi
 if [ -z "$SD" ]; then
-    SD=1
+    SD=0x000001
 fi
 printf "logger:
     file: /var/log/open5gs/nssf.log

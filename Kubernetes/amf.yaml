@@ -30,7 +30,7 @@ spec:
             - name: NRF_ADDR
               value: nrf-service
             - name: S_NSSAI
-              value: "1 1;1 2"
+              value: "1 0x000001;1 0x000002"
             - name: LOG_ADDR
               value: "192.168.39.1" # logger server address
             - name: LOG_PORT

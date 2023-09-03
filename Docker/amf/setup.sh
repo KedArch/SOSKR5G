@@ -46,7 +46,7 @@ if [ -z "$TAC" ]; then
     TAC=1
 fi
 if [ -z "$S_NSSAI" ]; then
-    S_NSSAI=1
+    S_NSSAI="1 0x000001"
 fi
 S_NSSAI=`echo $S_NSSAI | sed 's/ /\n            sd: /g' | sed 's/;/\n          - sst: /g'`
 POINTER=`echo $HOSTNAME`

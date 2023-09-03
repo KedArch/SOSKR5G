@@ -51,7 +51,7 @@ if [ -z "$SST" ]; then
     SST=1
 fi
 if [ -z "$SD" ]; then
-    SD=1
+    SD=0x000001
 fi
 if [ -z "$DNN" ]; then
     DNN=internet
