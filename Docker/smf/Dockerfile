@@ -21,6 +21,9 @@ COPY setup.sh /root/setup.sh
 #ENV SST=
 #ENV SD=
 #ENV DNN=
+#ENV MCC=
+#ENV MNC=
+#ENV TAC=
 #ENV LOG_ADDR=
 #ENV LOG_PORT=
 #ENV USE_UDP=

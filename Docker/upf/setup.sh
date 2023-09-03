@@ -47,6 +47,9 @@ fi
 if [ -z "$SMF_ADDR" ]; then
     SMF_ADDR=127.0.0.4
 fi
+if [ -z "$DNN" ]; then
+    DNN=internet
+fi
 printf "logger:
     file: /var/log/open5gs/upf.log
 
@@ -57,6 +60,7 @@ upf:
       - addr: $GTPU_ADDR
     subnet:
       - addr: $SUBNET_ADDR
+        dnn: $DNN
     metrics:
       - addr: $METRICS_ADDR
         port: $METRICS_PORT

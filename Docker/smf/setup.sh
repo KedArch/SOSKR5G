@@ -56,6 +56,15 @@ fi
 if [ -z "$DNN" ]; then
     DNN=internet
 fi
+if [ -z "$MCC" ]; then
+    MCC=999
+fi
+if [ -z "$MNC" ]; then
+    MNC=70
+fi
+if [ -z "$TAC" ]; then
+    TAC=1
+fi
 printf "logger:
     file: /var/log/open5gs/smf.log
 
@@ -74,6 +83,7 @@ smf:
         port: $METRICS_PORT
     subnet:
       - addr: $SUBNET_ADDR
+        dnn: $DNN
     dns:
       - $DNS_ADDR
     info:
@@ -82,6 +92,11 @@ smf:
             sd: $SD
             dnn:
               - $DNN
+        tai:
+          - plmn_id:
+              mcc: $MCC
+              mnc: $MNC
+            tac: $TAC
 
 scp:
     sbi:
@@ -96,6 +111,7 @@ nrf:
 upf:
     pfcp:
       - addr: $UPF_ADDR
+        dnn: $DNN
 
 parameter:
 
